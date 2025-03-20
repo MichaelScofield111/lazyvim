@@ -4,4 +4,4 @@
 local keymap = vim.keymap
 vim.opt.updatetime = 200
 keymap.set("i", "jk", "<Esc>")
-keymap.set({"n", "v"}, "q", "b")
+keymap.set({ "n", "v" }, "q", "b")
