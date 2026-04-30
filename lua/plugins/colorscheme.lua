@@ -1,11 +1,13 @@
 return {
-  "tokyonight.nvim",
-  lazy = true,
-  priority = 1000,
-  opts = function()
-    return {
-      transparent = true,
-    }
-  end,
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "gruvbox",
+    },
+  },
 }
-

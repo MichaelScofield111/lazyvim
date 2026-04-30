@@ -4,7 +4,7 @@ return {
     require("fittencode").setup({
       keymaps = {
         inline = {
-          ["<C-Tab>"] = "accept_all_suggestions",
+          ["<C-z>"] = "accept_all_suggestions",
           ["<C-e>"] = "accept_line",
           ["<C-i>"] = "accept_word",
           ["<C-u>"] = "revoke_line",

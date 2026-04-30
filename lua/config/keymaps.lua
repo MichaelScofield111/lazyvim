@@ -4,4 +4,6 @@
 local keymap = vim.keymap
 vim.opt.updatetime = 200
 keymap.set("i", "jk", "<Esc>")
-keymap.set({ "n", "v" }, "q", "b")
+keymap.set({ "n", "i", "v" }, "<D-s>", "<cmd>w<cr>", { desc = "Save file" })
+keymap.set("n", "H", "^", { desc = "First non-blank of line" })
+keymap.set("n", "L", "$", { desc = "End of line" })

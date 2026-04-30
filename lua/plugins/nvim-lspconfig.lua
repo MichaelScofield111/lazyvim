@@ -1,24 +1,27 @@
 return {
   "neovim/nvim-lspconfig",
-  init = function()
-    local keys = require("lazyvim.plugins.lsp.keymaps").get()
-    -- disable a keymap
-    keys[#keys + 1] = { "<leader>ca", false }
-    keys[#keys + 1] = { "<leader>cc", false }
-    keys[#keys + 1] = { "<leader>cC", false }
-    keys[#keys + 1] = { "<leader>cR", false }
-    keys[#keys + 1] = { "<leader>cr", false }
-    keys[#keys + 1] = { "<leader>cA", false }
-    keys[#keys + 1] = { "<leader>cl", false }
-    keys[#keys + 1] = { "<leader>cs", false }
-    keys[#keys + 1] = { "<leader>cS", false }
-  end,
   opts = {
     servers = {
-      -- Ensure mason installs the server
+      -- 全局禁用（对所有 LSP 服务器生效）
+      ["*"] = {
+        keys = {
+          { "<leader>ca", false },
+          { "<leader>cc", false },
+          { "<leader>cC", false },
+          { "<leader>cR", false },
+          { "<leader>cr", false },
+          { "<leader>cA", false },
+          { "<leader>cl", false },
+          { "<leader>cs", false },
+          { "<leader>cS", false },
+        },
+      },
+      -- clangd 特定配置
       clangd = {
         keys = {
-          { "<leader>cR", false },
+          -- 这里只需要禁用 clangd 特有的，全局已经禁用过的可以省略
+          -- 如果全局已经禁用了 <leader>cR，这里不需要重复
+          -- 但如果你想单独为 clangd 启用某个键，可以在这里覆盖
         },
       },
     },
