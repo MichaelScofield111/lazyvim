@@ -5,7 +5,7 @@ return {
       -- 全局禁用（对所有 LSP 服务器生效）
       ["*"] = {
         keys = {
-          { "<leader>ca", false },
+          { "<leader>ca", vim.lsp.buf.code_action, desc = "LSP Code Action" },
           { "<leader>cc", false },
           { "<leader>cC", false },
           { "<leader>cR", false },
