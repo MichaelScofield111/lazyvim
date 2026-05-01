@@ -8,27 +8,6 @@ return {
       "hrsh7th/cmp-path",
       "L3MON4D3/LuaSnip", -- luasnip 插
     },
-    keys = {
-      {
-        "<Tab>",
-        function()
-          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-      {
-        "<S-Tab>",
-        function()
-          return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-    },
-
     -- Not all LSP servers add brackets when completing a function.
     -- To better deal with this, LazyVim adds a custom option to cmp,
     -- that you can configure. For example:
@@ -44,6 +23,14 @@ return {
       local luasnip = require("luasnip")
       local defaults = require("cmp.config.default")()
       local auto_select = true
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        if col == 0 then
+          return false
+        end
+        local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+        return text:sub(col, col):match("%s") == nil
+      end
 
       return {
         auto_brackets = {}, -- configure any filetype to auto add brackets
@@ -66,6 +53,8 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(1) then
               luasnip.jump(1)
+            elseif not has_words_before() then
+              fallback()
             else
               fallback()
             end
